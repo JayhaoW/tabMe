@@ -1,0 +1,22 @@
+{
+   "name": "noDupeTab",
+   "version": "1.0",
+   "manifest_version": 2,
+   "description": "Swap to preexisting tab if website is already open.",
+   "icons": {
+      "128": "tab_duplicate.png"
+   },
+   "page_action": {
+      "default_title": "tabMe",
+      "default_icon": "icon.png"
+   },
+   "background": {
+      "scripts":["background.js"]
+   },
+   "permissions": [
+      "tabs",
+      "activeTab"
+   ]
+
+}
+   
