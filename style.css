@@ -1,14 +1,21 @@
 form{
 	display: inline;
-	margin-bottom: 30px
 }
+
+.default-row-spacer{
+	margin-bottom: 10px;
+}
+
 select{
 	width: 175px;
 	overflow-x: auto;
 	overflow-y: auto;
 	margin-bottom: 7px;
-	margin-top: 7px;
+	margin-top: 0px;
 }
 #add{
 	margin-left: 3px;
+}
+#example{
+	font-size: 70%;
 }
