@@ -1,46 +1,27 @@
-var urls= {};
-console.log("hi there");
-
-//use to get the url of all tabs
-/*
-chrome.tabs.query({currentWindow:true},function(tabs){
-	urls = tabs;
-	for (i = 0; i < urls.length; i++){
-		console.log(urls[i].url);
-	}
-});
-*/
-
-chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,thisTab){
-	console.log("activate");
-	//console.log(thisTab.highlighted);
+//event listener when updates
+chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,thisTab){ 
+	var whiteList = localStorage.getItem("whiteList");
 	if (thisTab.highlighted == true) {
-		//console.log("Second");
-		chrome.tabs.query({currentWindow:true},function(tabs){
-			for(i = 0; i < tabs.length;i++){
-				if(thisTab.url == tabs[i].url && thisTab.id!=tabs[i].id){
-					chrome.tabs.update(tabs[i].id,{highlighted:true},null);
-					console.log(thisTab.index);
-					console.log(thisTab.url);
-					console.log("tab url: " + tabs[i].url);
-					console.log("tab index: " + tabs[i].index);
-
-					chrome.tabs.remove(thisTab.id,null);
-					break;
-					//console.log(i);
+		var tabURL = thisTab.url;
+		tabURL = tabURL.replace(/^.*:\/\//,"");
+		tabURL = tabURL.substr(0,tabURL.length - 1);
+		if(whiteList.includes(tabURL) == false && changeInfo.status == "loading"){
+			//if the tab updated is current tab, look through all tabs opened in 
+			//current window
+			chrome.tabs.query({currentWindow:true},function(tabs){
+				for(i = 0; i < tabs.length;i++){
+					//if any tab have the same url the swap to existing tab and 
+					//remove tab
+					if(thisTab.url == tabs[i].url && thisTab.id!=tabs[i].id){
+						chrome.tabs.update(tabs[i].id,{highlighted:true},null);
+						chrome.tabs.remove(thisTab.id,null);
+						break;		
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 });
-
-/*
-chrome.tabs.onUpdate.addListener(function(tabId,changeInfo,tab){
-	if(changeInfo.status == "loading"){
-		if()
-	}
-});
-*/
 
 
 
