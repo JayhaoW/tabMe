@@ -7,15 +7,22 @@ form{
 }
 
 select{
-	width: 175px;
+	width: 180px;
 	overflow-x: auto;
 	overflow-y: auto;
 	margin-bottom: 7px;
-	margin-top: 0px;
+	margin-top: 5px;
 }
 #add{
 	margin-left: 3px;
+	float:right;
+	margin-top: 2px;
 }
 #example{
-	font-size: 70%;
+	font-size: 80%;
+}
+
+p{
+	display: inline-block;
+	margin-top: 5px;
 }
