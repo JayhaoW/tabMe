@@ -5,7 +5,7 @@ chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,thisTab){
 		var tabURL = thisTab.url;
 		tabURL = tabURL.replace(/^.*:\/\//,"");
 		tabURL = tabURL.substr(0,tabURL.length - 1);
-		if(whiteList.includes(tabURL) == false && changeInfo.status == "loading"){
+		if((whiteList == null || whiteList.includes(tabURL) == false) && changeInfo.status == "loading"){
 			//if the tab updated is current tab, look through all tabs opened in 
 			//current window
 			chrome.tabs.query({currentWindow:true},function(tabs){
